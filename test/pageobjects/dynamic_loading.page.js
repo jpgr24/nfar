@@ -122,6 +122,39 @@ async hastext(test){
   
   }
 
+async logout (test) {
+    it(test.text, async () => {
+      this.open(test.path)
+     
+    await $(test.inputus).setValue(test.username);
+    await browser.pause(2000)
+    await $(test.inputpass).setValue(test.password);
+    await browser.pause(2000)
+    await $(test.but[0]).click();
+    await browser.pause(2000)
+    await $(test.but[1]).click();
+     await browser.pause(5000)
+    await expect($(test.elementexpected)).toBeExisting();});
+    
+  
+  }
+
+
+  async logoutclick (test) {
+    it(test.text, async () => {
+      this.open(test.path)
+     
+   
+    await $(test.but[1]).click();
+     await browser.pause(5000)
+    await $(test.but[2]).click();
+    await browser.pause(5000)
+    await expect($(test.elementexpected)).toBeExisting();
+  });
+    
+  
+  }
+
   async exist(testing) {
         it(testing.text, async () => {
         await this.open(testing.path);
