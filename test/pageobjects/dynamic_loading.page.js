@@ -24,13 +24,15 @@ class DynamicLoadingPage extends Page {
     it(test.text, async () => {
 
       await this.open(test.path,test.element)
-      await browser.pause(2000);
+      
+      await browser.pause(200);
       await $(test.inputus).setValue(test.username);
-    await browser.pause(2000)
+    
     await $(test.inputpass).setValue(test.password);
-    await browser.pause(2000)
+    await browser.pause(200)
       await $(test.element).click();
-      await browser.pause(2000);
+      await browser.pause(200);
+      await browser.saveScreenshot('./screenshot/'+test.text+'.png');
       await expect($(test.element)).toBeChecked()
              
   });
@@ -41,12 +43,13 @@ async checkingloginsign(test) {
 
       
       await $(test.inputus).setValue(test.username);
-    await browser.pause(2000)
+    await browser.pause(200)
     await $(test.inputpass).setValue(test.password);
     
-      await browser.pause(2000);
+      await browser.pause(200);
       await $(test.but).click();
-    await browser.pause(2000)
+    await browser.pause(200)
+    await browser.saveScreenshot('./screenshot/'+test.text+'.png');
     await expect($(test.elementexpected)).toBeExisting();
              
   });
@@ -55,9 +58,9 @@ async checkingloginsign(test) {
 async attribute(testing) {
         it(testing.text, async () => {
         await this.open(testing.path);
-        //await browser.pause(2000)
+        //await browser.pause(500)
         await expect($(testing.element)).toHaveAttr(testing.attr, testing.value)
-        //await browser.saveScreenshot('./screenshot/screenshot.png');
+        await browser.saveScreenshot('./screenshot/'+testing.text+'.png');
         
     });
   } 
@@ -67,9 +70,11 @@ async attribute(testing) {
       it(testing.text, async () => {
         await this.open(testing.path);
         await $(testing.inputus).setValue(testing.username);
-        //await browser.pause(2000)
+        await browser.saveScreenshot('./screenshot/'+testing.text+'1.png');
+        //await browser.pause(500)
         await $(testing.element).click();
-        await browser.pause(5000)
+        await browser.pause(200)
+        await browser.saveScreenshot('./screenshot/'+testing.text+'2.png');
         await expect($(testing.elementexpected)).toBeExisting();
         //await browser.saveScreenshot('./screenshot/screenshot.png');
         
@@ -79,7 +84,7 @@ async attribute(testing) {
   async forgot(testing){
         it(testing.text, async () => {
         await this.open(testing.path);
-        //await browser.pause(2000)
+        //await browser.pause(500)
         await expect($(testing.element)).toHaveAttr(testing.attr, testing.value)
         //await browser.saveScreenshot('./screenshot/screenshot.png');
         
@@ -88,10 +93,11 @@ async attribute(testing) {
 async golink(testing){
     it(testing.text, async () => {
       this.open(testing.path)
-     
+     await browser.saveScreenshot('./screenshot/'+testing.text+'1.png');
     
     await $(testing.element).click();
-    await browser.pause(2000)
+    await browser.pause(200)
+    await browser.saveScreenshot('./screenshot/'+testing.text+'2.png');
     await expect($(testing.elementexpected)).toBeExisting();});
 
 }
@@ -109,12 +115,15 @@ async hastext(test){
     it(text, async () => {
       this.open(path)
       await expect(browser).toHaveUrl(`https://nfar.rallybound.org/${path}`)
+      await browser.saveScreenshot('./screenshot/'+text+'1.png');
     await $(inputus).setValue(username);
-    await browser.pause(2000)
+    await browser.pause(500)
     await $(inputpass).setValue(password);
-    await browser.pause(2000)
+    await browser.pause(500)
+    await browser.saveScreenshot('./screenshot/'+text+'2.png');
     await $(but).click();
-    await browser.pause(2000)
+    await browser.pause(500)
+    await browser.saveScreenshot('./screenshot/'+text+'3.png');
     await expect($(elementexpected)).toBeExisting();});
     
   
@@ -123,15 +132,18 @@ async hastext(test){
 async logout (test) {
     it(test.text, async () => {
       this.open(test.path)
-     
+     await browser.saveScreenshot('./screenshot/'+test.text+'1.png');
     await $(test.inputus).setValue(test.username);
-    await browser.pause(2000)
+    await browser.pause(500)
     await $(test.inputpass).setValue(test.password);
-    await browser.pause(2000)
+    await browser.pause(500)
     await $(test.but[0]).click();
-    await browser.pause(2000)
+
+    await browser.pause(500)
+    await browser.saveScreenshot('./screenshot/'+test.text+'2.png');
     await $(test.but[1]).click();
-     await browser.pause(5000)
+     await browser.pause(500)
+     await browser.saveScreenshot('./screenshot/'+test.text+'3.png');
     await expect($(test.elementexpected)).toBeExisting();});
     
   
@@ -142,10 +154,10 @@ async logout (test) {
     it(test.text, async () => {
       
      
-   
+   await browser.saveScreenshot('./screenshot/'+test.text+'1.png');
     await $(test.but).click();
-     await browser.pause(5000)
-    
+     await browser.pause(500)
+    await browser.saveScreenshot('./screenshot/'+test.text+'2.png');
     await expect($(test.elementexpected)).toBeExisting();
   });
     
@@ -155,9 +167,8 @@ async logout (test) {
   async exist(testing) {
         it(testing.text, async () => {
         await this.open(testing.path);
-        //await browser.pause(2000)
+       
         await expect($(testing.element)).toBeExisting();
-        //await browser.saveScreenshot('./screenshot/screenshot.png');
         
     });
   }
