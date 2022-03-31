@@ -20,36 +20,34 @@ class DynamicLoadingPage extends Page {
       await $(element).click();
       //await $(element).waitForDisplayed({ timeout: 5000, reverse : true });
   }
-  async checkinglogin(path,element,inputus,inputpass,username, password,text) {
-    it(text, async () => {
+  async checkinglogin(test) {
+    it(test.text, async () => {
 
-      await this.open(path,element)
+      await this.open(test.path,test.element)
       await browser.pause(2000);
-      await $(inputus).setValue(username);
+      await $(test.inputus).setValue(test.username);
     await browser.pause(2000)
-    await $(inputpass).setValue(password);
+    await $(test.inputpass).setValue(test.password);
     await browser.pause(2000)
-      await $(element).click();
+      await $(test.element).click();
       await browser.pause(2000);
-      await expect($(element)).toBeChecked()
+      await expect($(test.element)).toBeChecked()
              
   });
 
  }
-async checkingloginsign(path,inputus,inputpass,but,username, password,text,element,elementexpected) {
-    it(text, async () => {
+async checkingloginsign(test) {
+    it(test.text, async () => {
 
-      await this.open(path,element)
+      
+      await $(test.inputus).setValue(test.username);
+    await browser.pause(2000)
+    await $(test.inputpass).setValue(test.password);
+    
       await browser.pause(2000);
-      await $(inputus).setValue(username);
+      await $(test.but).click();
     await browser.pause(2000)
-    await $(inputpass).setValue(password);
-    await browser.pause(2000)
-      await $(element).click();
-      await browser.pause(2000);
-      await $(but).click();
-    await browser.pause(2000)
-    await expect($(elementexpected)).toBeExisting();
+    await expect($(test.elementexpected)).toBeExisting();
              
   });
 
@@ -142,13 +140,12 @@ async logout (test) {
 
   async logoutclick (test) {
     it(test.text, async () => {
-      this.open(test.path)
+      
      
    
-    await $(test.but[1]).click();
+    await $(test.but).click();
      await browser.pause(5000)
-    await $(test.but[2]).click();
-    await browser.pause(5000)
+    
     await expect($(test.elementexpected)).toBeExisting();
   });
     
