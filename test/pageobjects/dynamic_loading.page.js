@@ -20,18 +20,28 @@ class DynamicLoadingPage extends Page {
       await $(element).click();
       //await $(element).waitForDisplayed({ timeout: 5000, reverse : true });
   }
+
+async existdashboard(testing) {
+        it(testing.text, async () => {
+        
+       
+        await expect($(testing.element)).toBeExisting();
+        
+    });
+  }
+
   async checkinglogin(test) {
     it(test.text, async () => {
 
       await this.open(test.path,test.element)
       
-      await browser.pause(200);
+      
       await $(test.inputus).setValue(test.username);
     
     await $(test.inputpass).setValue(test.password);
-    await browser.pause(200)
+    
       await $(test.element).click();
-      await browser.pause(200);
+      
       await browser.saveScreenshot('./screenshot/'+test.text+'.png');
       await expect($(test.element)).toBeChecked()
              
@@ -43,12 +53,12 @@ async checkingloginsign(test) {
 
       
       await $(test.inputus).setValue(test.username);
-    await browser.pause(200)
+    
     await $(test.inputpass).setValue(test.password);
     
-      await browser.pause(200);
+     
       await $(test.but).click();
-    await browser.pause(200)
+    
     await browser.saveScreenshot('./screenshot/'+test.text+'.png');
     await expect($(test.elementexpected)).toBeExisting();
              
@@ -92,13 +102,14 @@ async attribute(testing) {
   } 
 async golink(testing){
     it(testing.text, async () => {
-      this.open(testing.path)
-     await browser.saveScreenshot('./screenshot/'+testing.text+'1.png');
-    
-    await $(testing.element).click();
-    await browser.pause(200)
-    await browser.saveScreenshot('./screenshot/'+testing.text+'2.png');
-    await expect($(testing.elementexpected)).toBeExisting();});
+      if(testing.path!='N/A')
+            await this.open(testing.path);
+      await browser.saveScreenshot('./screenshot/'+testing.text+'1.png');
+      $(testing.element).moveTo(0,0)
+      await $(testing.element).click();
+     
+      await browser.saveScreenshot('./screenshot/'+testing.text+'2.png');
+      await expect($(testing.elementexpected)).toBeExisting();});
 
 }
 
@@ -113,38 +124,50 @@ async hastext(test){
 
   async login (path,inputus,inputpass,but,username, password,text,elementexpected) {
     it(text, async () => {
-      this.open(path)
-      await expect(browser).toHaveUrl(`https://nfar.rallybound.org/${path}`)
+      if(path!='N/A'){
+        this.open(path)
+      }
+
       await browser.saveScreenshot('./screenshot/'+text+'1.png');
-    await $(inputus).setValue(username);
-    await browser.pause(500)
-    await $(inputpass).setValue(password);
-    await browser.pause(500)
-    await browser.saveScreenshot('./screenshot/'+text+'2.png');
-    await $(but).click();
-    await browser.pause(500)
-    await browser.saveScreenshot('./screenshot/'+text+'3.png');
-    await expect($(elementexpected)).toBeExisting();});
+      if(await $(inputus).isExisting()){
+       
+      await $(inputus).setValue(username);
+      
+      await $(inputpass).setValue(password);
+     
+      await browser.saveScreenshot('./screenshot/'+text+'2.png');
+
+      await $(but).click();
+     /* if(await $('#loginCaptcha').isExisting()){
+        await browser.pause(60000)
+       }*/
+      await browser.saveScreenshot('./screenshot/'+text+'3.png');}
+      await expect($(elementexpected)).toBeExisting();});
     
   
   }
 
 async logout (test) {
     it(test.text, async () => {
-      this.open(test.path)
-     await browser.saveScreenshot('./screenshot/'+test.text+'1.png');
-    await $(test.inputus).setValue(test.username);
-    await browser.pause(500)
-    await $(test.inputpass).setValue(test.password);
-    await browser.pause(500)
-    await $(test.but[0]).click();
+      if(test.path!='N/A'){
+        this.open(test.path)
+        browser.pause(20000)
+      }
+      //if(await $('').isExisting){}
+      await browser.saveScreenshot('./screenshot/'+test.text+'1.png');
+      
+      await $(test.inputus).setValue(test.username);
+      
+      await $(test.inputpass).setValue(test.password);
+      
+      await $(test.but[0]).click();
 
-    await browser.pause(500)
-    await browser.saveScreenshot('./screenshot/'+test.text+'2.png');
-    await $(test.but[1]).click();
-     await browser.pause(500)
-     await browser.saveScreenshot('./screenshot/'+test.text+'3.png');
-    await expect($(test.elementexpected)).toBeExisting();});
+      
+      await browser.saveScreenshot('./screenshot/'+test.text+'2.png');
+      await $(test.but[1]).click();
+      
+      await browser.saveScreenshot('./screenshot/'+test.text+'3.png');
+      await expect($(test.elementexpected)).toBeExisting();});
     
   
   }
@@ -156,7 +179,7 @@ async logout (test) {
      
    await browser.saveScreenshot('./screenshot/'+test.text+'1.png');
     await $(test.but).click();
-     await browser.pause(500)
+     
     await browser.saveScreenshot('./screenshot/'+test.text+'2.png');
     await expect($(test.elementexpected)).toBeExisting();
   });
@@ -166,9 +189,10 @@ async logout (test) {
 
   async exist(testing) {
         it(testing.text, async () => {
-        await this.open(testing.path);
+          if(testing.path!='N/A')
+            await this.open(testing.path);
        
-        await expect($(testing.element)).toBeExisting();
+          await expect($(testing.element)).toBeExisting();
         
     });
   }
