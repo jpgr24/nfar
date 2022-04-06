@@ -26,8 +26,12 @@ var login_exist=[{path:'N/A',element:'.actmypage .kbdContent a img',text: 'Dashb
 
 var clickdashboard=[{path:"N/A",element:'span=Donate', text:"Dashboard 24", elementexpected:".contdonate"}]
 
+
+
+
 describe('Elements exists', () => {
  for(var i=0;i<test.length;i++){
+          test[i].text=test[i].text+' '+browser.capabilities.browserName;
     	  DynamicLoadingPage.exist(test[i]);}
 		  
 });
@@ -37,13 +41,14 @@ describe('Click element', () => {
     
     
     for(var i=0;i<click.length;i++){
+          click[i].text=click[i].text+' '+browser.capabilities.browserName;
           DynamicLoadingPage.golink(click[i]);}
           
          
 });
 describe('Forgot', () => {
     
-    DynamicLoadingPage.forgotfull({path:"replicated/Account/ForgotPassword",username:'jgroening@yahoo.com' ,element:'.mT9',text: 'Login18 and Login 19',elementexpected:'.formSubmitMsg',inputus:'#forgotPasswordEmail'})  
+    DynamicLoadingPage.forgotfull({path:"replicated/Account/ForgotPassword",username:'jgroening@yahoo.com' ,element:'.mT9',text: 'Login18 and Login 19'+' '+browser.capabilities.browserName,elementexpected:'.formSubmitMsg',inputus:'#forgotPasswordEmail'}) ; 
 
 
         
@@ -59,13 +64,13 @@ describe('Forgot', () => {
 
 describe('Login and logout', () => {
     
-    DynamicLoadingPage.login('replicated/account/logon','#userName','#userPassword',"#btnFormSubmit", "jgroenin@yahoo.com", "Testing24-",'Login 8', '.errorDv')
-    DynamicLoadingPage.login('N/A','#userName','#userPassword',"#btnFormSubmit", " ", "Testing24-",'Login 9', '.errorDv')
-    DynamicLoadingPage.login('N/A','#userName','#userPassword',"#btnFormSubmit", "jgroening@yahoo.com", "Testing24",'Login 10', '.errorDv')
-    DynamicLoadingPage.login('N/A','#userName','#userPassword',"#btnFormSubmit", "jgroening@yahoo.com", " ",'Login 11', '.errorDv')
-    DynamicLoadingPage.logout({path:'N/A',inputus:'#userName',inputpass:'#userPassword',but:["#btnFormSubmit",'.profilePopButton img' ], username:"jgroening@yahoo.com", password:"Testing24-",text:'Login 7 and Logout 1', elementexpected:"button=Log Out"} )
+    DynamicLoadingPage.login('replicated/account/logon','#userName','#userPassword',"#btnFormSubmit", "jgroenin@yahoo.com", "Testing24-",'Login 8'+' '+browser.capabilities.browserName, '.errorDv')
+    DynamicLoadingPage.login('N/A','#userName','#userPassword',"#btnFormSubmit", " ", "Testing24-",'Login 9'+' '+browser.capabilities.browserName, '.errorDv')
+    DynamicLoadingPage.login('N/A','#userName','#userPassword',"#btnFormSubmit", "jgroening@yahoo.com", "Testing24",'Login 10'+' '+browser.capabilities.browserName, '.errorDv')
+    DynamicLoadingPage.login('N/A','#userName','#userPassword',"#btnFormSubmit", "jgroening@yahoo.com", " ",'Login 11'+' '+browser.capabilities.browserName, '.errorDv')
+    DynamicLoadingPage.logout({path:'N/A',inputus:'#userName',inputpass:'#userPassword',but:["#btnFormSubmit",'.profilePopButton img' ], username:"jgroening@yahoo.com", password:"Testing24-",text:'Login 7 and Logout 1'+' '+browser.capabilities.browserName, elementexpected:"button=Log Out"} )
     
-    DynamicLoadingPage.logoutclick({but:"button=Log Out", text:'Logout 2', elementexpected:".actindex"})   
+    DynamicLoadingPage.logoutclick({but:"button=Log Out", text:'Logout 2'+' '+browser.capabilities.browserName, elementexpected:".actindex"})   
           
         
    
@@ -77,8 +82,8 @@ describe('Login and logout', () => {
 
 describe('Remember me', () => {
     
-    DynamicLoadingPage.checkinglogin({path:'replicated/account/logon',inputus:'#userName',inputpass:'#userPassword',element:'#rememberMe', username:"jgroening@yahoo.com", password:"Testing24-",text:'Login 12 and Login 13'})
-    DynamicLoadingPage.checkingloginsign({inputus:'#userName',inputpass:'#userPassword',but:"#btnFormSubmit", username:"jgroening@yahoo.com", password:"Testing24-",text:'Login 14', elementexpected:"#profileImg"})
+    DynamicLoadingPage.checkinglogin({path:'replicated/account/logon',inputus:'#userName',inputpass:'#userPassword',element:'#rememberMe', username:"jgroening@yahoo.com", password:"Testing24-",text:'Login 12 and Login 13'+' '+browser.capabilities.browserName})
+    DynamicLoadingPage.checkingloginsign({inputus:'#userName',inputpass:'#userPassword',but:"#btnFormSubmit", username:"jgroening@yahoo.com", password:"Testing24-",text:'Login 14'+' '+browser.capabilities.browserName, elementexpected:"#profileImg"})
           
         
    
@@ -90,8 +95,9 @@ describe('Remember me', () => {
 
 describe('Dashboard exist', () => {
     
-    DynamicLoadingPage.login('replicated/account/logon','#userName','#userPassword',"#btnFormSubmit", "jgroening@yahoo.com", "Testing24-",'Dashboard 14', 'h1=My NFARTech_TestSite Fundraising Page')
+    DynamicLoadingPage.login('replicated/account/logon','#userName','#userPassword',"#btnFormSubmit", "jgroening@yahoo.com", "Testing24-",'Dashboard 14'+' '+browser.capabilities.browserName, 'h1=My NFARTech_TestSite Fundraising Page')
     for(var i=0;i<login_exist.length;i++){
+        login_exist[i].text=login_exist[i].text+' '+browser.capabilities.browserName;
           DynamicLoadingPage.exist(login_exist[i]);}    
    
     
@@ -105,7 +111,11 @@ describe('Dashboard click element', () => {
     
     
     for(var i=0;i<clickdashboard.length;i++){
-          DynamicLoadingPage.golink(clickdashboard[i]);}
+        
+        clickdashboard[i].text=clickdashboard[i].text+' '+browser.capabilities.browserName;
+          DynamicLoadingPage.golink(clickdashboard[i]);
+
+      }
           
          
 });

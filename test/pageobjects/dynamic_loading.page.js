@@ -7,13 +7,7 @@ class DynamicLoadingPage extends Page {
     /**
      * define selectors using getter methods
      */
-     get startButton() {
-        return $('#start button'); //uses Element with certain text selector
-   }
-  /**
-   * overwrite specific options to adapt it to page object
-   */
-  get remember(){return $('#rememberMe')}
+     
    async Click(path,element) {
      await this.open(path);
 
@@ -22,6 +16,7 @@ class DynamicLoadingPage extends Page {
   }
 
 async existdashboard(testing) {
+        
         it(testing.text, async () => {
         
        
